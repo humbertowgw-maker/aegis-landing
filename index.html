@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aegis — Glucose Monitoring, Built by Integration Not Invention</title>
+<meta name="description" content="Aegis is a tiered glucose-monitoring platform for diabetic dogs, built by combining proven medical hardware instead of inventing a new biosensor — starting free, scaling to continuous monitoring." />
+<meta property="og:title" content="Aegis" />
+<meta property="og:description" content="A tiered glucose-monitoring platform for diabetic dogs — accessible, affordable, built on proven hardware." />
+<meta property="og:type" content="website" />
+<meta name="theme-color" content="#142837" />
+<style>
+  :root {
+    --bg: #F2F4F6;
+    --surface: #FFFFFF;
+    --surface-2: #F8F9FA;
+    --ink: #14212C;
+    --ink-muted: #4E5D68;
+    --ink-faint: #7C8994;
+    --line: #DCE2E6;
+    --primary: #1F3A52;
+    --primary-strong: #142837;
+    --primary-pale: #DCE6EC;
+    --accent: #BD7A34;
+    --accent-soft: #F1E1C9;
+    --accent-bright: #E0A85C;
+    --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    --font-body: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---- Nav ---- */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(20, 40, 55, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-family: var(--font-display); font-size: 20px; letter-spacing: 0.02em; }
+  .brand .mark { font-size: 22px; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; transition: color 0.15s; }
+  .nav-links a:hover { color: #fff; }
+  .nav-cta { background: var(--accent); color: #1a1206; padding: 9px 18px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600; }
+
+  /* ---- Hero ---- */
+  .hero {
+    background: radial-gradient(ellipse at top right, #1e3d54 0%, var(--primary-strong) 55%, #0d1a24 100%);
+    color: #fff;
+    padding: 100px 0 90px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(224,168,92,0.10) 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: 0.5;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 720px; }
+  .eyebrow { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-bright); font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+  .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-bright); box-shadow: 0 0 12px var(--accent-bright); }
+  .hero h1 { font-size: 58px; line-height: 1.06; margin-bottom: 22px; letter-spacing: -0.01em; }
+  .hero h1 em { font-style: italic; color: var(--accent-bright); }
+  .hero p.lede { font-size: 19px; color: rgba(255,255,255,0.82); max-width: 560px; margin-bottom: 36px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; }
+  .btn-primary { background: var(--accent); color: #1a1206; padding: 13px 26px; border-radius: 7px; text-decoration: none; font-weight: 600; font-size: 15px; transition: transform 0.15s, box-shadow 0.15s; }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(224,168,92,0.25); }
+  .btn-ghost { border: 1px solid rgba(255,255,255,0.25); color: #fff; padding: 12px 26px; border-radius: 7px; text-decoration: none; font-size: 15px; }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); }
+  .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 28px; }
+  .hero-stat .num { font-family: var(--font-mono); font-size: 26px; font-weight: 600; color: #fff; font-variant-numeric: tabular-nums; }
+  .hero-stat .label { font-size: 12.5px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+
+  /* ---- Section shell ---- */
+  section { padding: 88px 0; }
+  .section-head { max-width: 640px; margin-bottom: 48px; }
+  .section-eyebrow { font-size: 12.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+  .section-head h2 { font-size: 36px; color: var(--ink); margin-bottom: 14px; }
+  .section-head p { font-size: 16.5px; color: var(--ink-muted); }
+
+  /* ---- Approach ---- */
+  .approach { background: var(--surface); }
+  .approach-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .approach-grid p { color: var(--ink-muted); font-size: 16px; margin-bottom: 16px; }
+  .approach-grid strong { color: var(--ink); }
+  .not-list { list-style: none; }
+  .not-list li { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .not-list li:last-child { border-bottom: none; }
+  .not-list .x { color: #b5493f; font-weight: 700; }
+  .not-list .check { color: #2f7d5c; font-weight: 700; }
+
+  /* ---- Tiers ---- */
+  .tiers { background: var(--bg); }
+  .tier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .tier-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 26px 22px; display: flex; flex-direction: column; gap: 12px; transition: transform 0.15s, box-shadow 0.15s; }
+  .tier-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(20,33,44,0.08); }
+  .tier-num { font-family: var(--font-mono); font-size: 13px; color: var(--accent); font-weight: 700; }
+  .tier-card h3 { font-size: 18px; font-family: var(--font-body); font-weight: 700; color: var(--ink); }
+  .tier-card p { font-size: 14px; color: var(--ink-muted); flex-grow: 1; }
+  .tier-pill { align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
+  .pill-live { background: #E4F3EC; color: #2f7d5c; }
+  .pill-built { background: #FBF0DA; color: #b5811a; }
+
+  /* ---- Proof ---- */
+  .proof { background: var(--primary-strong); color: #fff; }
+  .proof .section-head h2 { color: #fff; }
+  .proof .section-head p { color: rgba(255,255,255,0.7); }
+  .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .proof-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; }
+  .proof-card .num { font-family: var(--font-mono); font-size: 32px; font-weight: 700; color: var(--accent-bright); font-variant-numeric: tabular-nums; margin-bottom: 8px; }
+  .proof-card .desc { font-size: 14px; color: rgba(255,255,255,0.75); }
+
+  /* ---- Vision ---- */
+  .vision { background: var(--surface); }
+  .vision-inner { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+  .vision-inner p { color: var(--ink-muted); font-size: 16.5px; margin-bottom: 16px; }
+  .vision-inner strong { color: var(--ink); }
+  .species-row { display: flex; gap: 14px; flex-wrap: wrap; }
+  .species-chip { background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 20px; flex: 1; min-width: 130px; text-align: center; }
+  .species-chip .icon { font-size: 28px; margin-bottom: 8px; }
+  .species-chip .name { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .species-chip .status { font-size: 12px; color: var(--ink-faint); }
+
+  /* ---- CTA ---- */
+  .cta { background: linear-gradient(135deg, var(--primary-strong), #0d1a24); color: #fff; text-align: center; }
+  .cta-inner { max-width: 620px; margin: 0 auto; }
+  .cta h2 { font-size: 34px; margin-bottom: 16px; color: #fff; }
+  .cta p { font-size: 16.5px; color: rgba(255,255,255,0.75); margin-bottom: 32px; }
+  .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  footer { background: var(--surface-2); border-top: 1px solid var(--line); padding: 40px 0; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .footer-inner .brand-small { font-family: var(--font-display); font-size: 16px; color: var(--ink); }
+  .footer-links { display: flex; gap: 24px; list-style: none; font-size: 13.5px; }
+  .footer-links a { text-decoration: none; color: var(--ink-muted); }
+  .footer-note { font-size: 12px; color: var(--ink-faint); margin-top: 6px; }
+
+  @media (max-width: 860px) {
+    .hero h1 { font-size: 40px; }
+    .approach-grid, .vision-inner { grid-template-columns: 1fr; }
+    .tier-grid { grid-template-columns: 1fr 1fr; }
+    .proof-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+  @media (max-width: 520px) {
+    .tier-grid { grid-template-columns: 1fr; }
+    .wrap { padding: 0 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="brand"><span class="mark">🛡️</span> Aegis</a>
+    <ul class="nav-links">
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#product">Product</a></li>
+      <li><a href="#proof">Status</a></li>
+      <li><a href="#vision">Vision</a></li>
+    </ul>
+    <a href="mailto:humberto@whitegwireless.com" class="nav-cta">Get in touch</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="eyebrow">Now building — Tiers 1&ndash;4 in active development</div>
+    <h1>Glucose monitoring for dogs, built by <em>integration</em>, not invention.</h1>
+    <p class="lede">Aegis combines already-proven, already-cleared medical hardware into one platform that scales from free manual logging to full continuous monitoring — instead of spending years building a new biosensor from scratch.</p>
+    <div class="hero-actions">
+      <a href="#product" class="btn-primary">See the product</a>
+      <a href="mailto:humberto@whitegwireless.com" class="btn-ghost">For investors &amp; partners</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="num">4</div><div class="label">Product tiers, zero&nbsp;hardware to owned&nbsp;stack</div></div>
+      <div class="hero-stat"><div class="num">54</div><div class="label">Automated tests, real coverage</div></div>
+      <div class="hero-stat"><div class="num">$0</div><div class="label">Cost to start monitoring today</div></div>
+    </div>
+  </div>
+</header>
+
+<section class="approach" id="approach">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">The Approach</div>
+      <h2>We are not a biosensor company.</h2>
+      <p>Designing a new glucose-sensing element is a multi-year, capital-intensive, regulatory-heavy undertaking — and doing early iterations of that on a living animal is a real safety problem, not a corner worth cutting. Aegis's engineering goes into the layer above the sensor.</p>
+    </div>
+    <div class="approach-grid">
+      <div>
+        <p><strong>Every sensor in our platform is an already-manufactured, already-cleared product</strong> designed for human use — applied thoughtfully to dogs, not reinvented from zero. Our own work is the calibration engine, the trend analysis, the hypoglycemia early-warning system, and the bridge hardware that connects proven sensors into one coherent platform.</p>
+        <p>That's a systems-integration problem, and it's the one we're built to solve well: take what already works in human medicine, verify it rigorously, and make it accessible for the animals who need it too.</p>
+      </div>
+      <ul class="not-list">
+        <li><span class="x">✕</span> Inventing a new biosensor from scratch</li>
+        <li><span class="check">✓</span> Integrating FDA-cleared, mass-manufactured sensors</li>
+        <li><span class="x">✕</span> Locking owners into one expensive hardware path</li>
+        <li><span class="check">✓</span> A tiered ladder from free to full continuous monitoring</li>
+        <li><span class="x">✕</span> A dosing calculator that tells you what to give</li>
+        <li><span class="check">✓</span> A formula reference, gated behind real comprehension checks, that always defers to your vet</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="tiers" id="product">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">The Product</div>
+      <h2>Four tiers. One platform.</h2>
+      <p>Every tier feeds the same trend chart, the same calibration engine, and the same hypoglycemia-drop alert logic — an owner can start at zero hardware and move up without switching platforms or losing history.</p>
+    </div>
+    <div class="tier-grid">
+      <div class="tier-card">
+        <span class="tier-num">01</span>
+        <h3>Manual Entry</h3>
+        <span class="tier-pill pill-live">Live</span>
+        <p>Type in a reading from any glucometer you already own — or take a photo and let a local vision model read it for you. No hardware required.</p>
+      </div>
+      <div class="tier-card">
+        <span class="tier-num">02</span>
+        <h3>Auto-Capture</h3>
+        <span class="tier-pill pill-built">Firmware built</span>
+        <p>An Aegis bridge board auto-captures every reading from an ordinary Bluetooth glucometer, built on the public Bluetooth SIG Glucose Profile.</p>
+      </div>
+      <div class="tier-card">
+        <span class="tier-num">03</span>
+        <h3>Partner Sensor</h3>
+        <span class="tier-pill pill-live">Live</span>
+        <p>Historical trend logging synced from a Dexcom Stelo sensor via Apple Health — transparently labeled as delayed data, never presented as real-time.</p>
+      </div>
+      <div class="tier-card">
+        <span class="tier-num">04</span>
+        <h3>Aegis-Owned Stack</h3>
+        <span class="tier-pill pill-built">Firmware built</span>
+        <p>Real-time continuous monitoring — our own bridge hardware talking directly to an open-protocol sensor, no third-party app, no delay.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof" id="proof">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Real, Not a Deck</div>
+      <h2>What's actually built.</h2>
+      <p>Every number below is independently verified — real tests run, real code compiled, real end-to-end checks in a real browser, not just described in a plan.</p>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="num">54/54</div>
+        <div class="desc">Automated backend tests passing, including every branch of the safety-critical dose-guidance logic.</div>
+      </div>
+      <div class="proof-card">
+        <div class="num">2</div>
+        <div class="desc">Real ESP32 firmware builds — a standard Bluetooth glucometer bridge, and a direct-BLE bridge to an open-protocol CGM sensor.</div>
+      </div>
+      <div class="proof-card">
+        <div class="num">1</div>
+        <div class="desc">Real iOS companion app, verified end-to-end against a live backend with a genuine HealthKit round-trip test.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="vision" id="vision">
+  <div class="wrap vision-inner">
+    <div>
+      <div class="section-eyebrow">Beyond Dogs</div>
+      <h2 style="font-size:32px; margin-bottom:18px;">The same platform, a bigger problem.</h2>
+      <p>Nothing in the core platform — calibration, trend analysis, hypoglycemia-drop alerting — is dog-specific; only the presets are. The same architecture that monitors a diabetic dog applies directly to cats, and the underlying glucose-monitoring problem it solves is identical for humans.</p>
+      <p><strong>This is stated as direction, not a near-term commitment.</strong> Our roadmap today is scoped to the canine product; expansion follows once the tiers above are proven with real dogs and real vets.</p>
+    </div>
+    <div class="species-row">
+      <div class="species-chip"><div class="icon">🐕</div><div class="name">Dogs</div><div class="status">Current focus</div></div>
+      <div class="species-chip"><div class="icon">🐈</div><div class="name">Cats</div><div class="status">Same architecture</div></div>
+      <div class="species-chip"><div class="icon">🧑</div><div class="name">Humans</div><div class="status">Long-term direction</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap cta-inner">
+    <h2>Building something real in a space that needed it.</h2>
+    <p>Aegis is founder-led, built with near-zero cash burn, and every claim on this page is backed by working code — not just a plan. If you're an investor, a partner, or a vet who wants to see more, we'd like to talk.</p>
+    <div class="cta-actions">
+      <a href="mailto:humberto@whitegwireless.com" class="btn-primary">Email humberto@whitegwireless.com</a>
+      <a href="https://github.com/humbertowgw-maker/canine-cgm-bridge" class="btn-ghost">View the code</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div>
+      <div class="brand-small">🛡️ Aegis</div>
+      <div class="footer-note">Built by White Glove Wireless · &copy; 2026</div>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#product">Product</a></li>
+      <li><a href="https://github.com/humbertowgw-maker/canine-cgm-bridge">GitHub</a></li>
+      <li><a href="mailto:humberto@whitegwireless.com">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
