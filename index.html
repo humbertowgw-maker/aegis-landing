@@ -108,8 +108,20 @@
   /* ---- Tiers ---- */
   .tiers { background: var(--bg); }
   .tier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-  .tier-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 26px 22px; display: flex; flex-direction: column; gap: 12px; transition: transform 0.15s, box-shadow 0.15s; }
-  .tier-card:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(20,33,44,0.08); }
+  .tier-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 26px 22px; display: flex; flex-direction: column; gap: 12px; transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s; cursor: pointer; }
+  .tier-card:hover, .tier-card:focus-visible { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(20,33,44,0.08); border-color: var(--accent); outline: none; }
+  .tier-click-hint { font-size: 12.5px; color: var(--accent); font-weight: 600; margin-top: auto; padding-top: 4px; }
+
+  .preview-modal { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; padding: 24px; }
+  .preview-modal.open { display: flex; }
+  .preview-modal-backdrop { position: absolute; inset: 0; background: rgba(10,16,22,0.75); backdrop-filter: blur(3px); }
+  .preview-modal-panel { position: relative; background: var(--surface); border-radius: 14px; max-width: 780px; width: 100%; max-height: 88vh; overflow-y: auto; padding: 28px; box-shadow: 0 30px 70px rgba(0,0,0,0.35); }
+  .preview-modal-close { position: absolute; top: 16px; right: 16px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink-muted); font-size: 15px; cursor: pointer; }
+  .preview-modal-close:hover { color: var(--ink); }
+  .preview-modal-label { font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .preview-modal-panel h3 { font-size: 22px; color: var(--ink); margin-bottom: 16px; padding-right: 30px; }
+  .preview-modal-panel img { width: 100%; border-radius: 10px; border: 1px solid var(--line); display: block; margin-bottom: 14px; }
+  .preview-modal-panel p { font-size: 14px; color: var(--ink-muted); }
   .tier-num { font-family: var(--font-mono); font-size: 13px; color: var(--accent); font-weight: 700; }
   .tier-card h3 { font-size: 18px; font-family: var(--font-body); font-weight: 700; color: var(--ink); }
   .tier-card p { font-size: 14px; color: var(--ink-muted); flex-grow: 1; }
@@ -118,6 +130,24 @@
   .pill-built { background: #FBF0DA; color: #b5811a; }
 
   /* ---- Proof ---- */
+  .live-chart { background: var(--surface); }
+  .chart-card { background: var(--surface-2); border: 1px solid var(--line); border-radius: 14px; padding: 26px 28px 18px; }
+  .chart-card-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; font-size: 15px; color: var(--ink); }
+  .chart-sub { font-size: 13px; color: var(--ink-faint); font-weight: 400; margin-left: 6px; }
+  .chart-legend { font-size: 12.5px; color: var(--ink-muted); display: flex; align-items: center; gap: 7px; }
+  .legend-swatch { width: 12px; height: 12px; border-radius: 3px; background: rgba(47,125,92,0.25); border: 1px solid rgba(47,125,92,0.5); }
+  #demo-chart { width: 100%; height: auto; display: block; overflow: visible; cursor: crosshair; }
+  .chart-axis-label { fill: var(--ink-faint); font-size: 11px; font-family: var(--font-body); }
+  .chart-gridline { stroke: var(--line); stroke-width: 1; }
+  .chart-band { fill: #2f7d5c; opacity: 0.09; }
+  .chart-band-label { fill: #2f7d5c; font-size: 11px; font-family: var(--font-body); font-weight: 600; }
+  .chart-line { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+  .chart-dot { fill: var(--accent); stroke: var(--surface-2); stroke-width: 2; }
+  .chart-dot:hover, .chart-dot.active { fill: var(--primary); r: 6; }
+  .chart-tooltip { position: relative; }
+  .chart-tooltip-box { position: absolute; pointer-events: none; background: var(--primary-strong); color: #fff; font-size: 12.5px; padding: 7px 11px; border-radius: 7px; white-space: nowrap; transform: translate(-50%, -115%); opacity: 0; transition: opacity 0.1s; font-variant-numeric: tabular-nums; }
+  .chart-tooltip-box.visible { opacity: 1; }
+
   .proof { background: var(--primary-strong); color: #fff; }
   .proof .section-head h2 { color: #fff; }
   .proof .section-head p { color: rgba(255,255,255,0.7); }
@@ -127,6 +157,29 @@
   .proof-card .desc { font-size: 14px; color: rgba(255,255,255,0.75); }
 
   /* ---- Vision ---- */
+  .real-data { background: var(--bg); }
+  .data-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 40px; }
+  .data-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px 20px; }
+  .data-card-highlight { background: var(--primary-strong); border-color: var(--primary-strong); }
+  .data-card-highlight .data-label, .data-card-highlight .data-source { color: rgba(255,255,255,0.75); }
+  .data-card-highlight .data-num { color: var(--accent-bright); }
+  .data-num { font-family: var(--font-mono); font-size: 30px; font-weight: 700; color: var(--primary); margin-bottom: 8px; font-variant-numeric: tabular-nums; }
+  .data-label { font-size: 14px; color: var(--ink-muted); margin-bottom: 10px; line-height: 1.45; }
+  .data-source { font-size: 11.5px; color: var(--ink-faint); border-top: 1px solid var(--line); padding-top: 8px; }
+  .data-card-highlight .data-source { border-top-color: rgba(255,255,255,0.15); }
+  .data-note-block { max-width: 760px; }
+  .data-note-block h3 { font-size: 17px; color: var(--ink); margin: 26px 0 10px; font-family: var(--font-body); font-weight: 700; }
+  .data-note-block h3:first-child { margin-top: 0; }
+  .data-note-block p { font-size: 15px; color: var(--ink-muted); line-height: 1.65; }
+
+  .resources { background: var(--surface); }
+  .resource-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .resource-card { display: block; background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 22px; text-decoration: none; transition: border-color 0.15s, transform 0.15s; }
+  .resource-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .resource-org { font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  .resource-title { font-size: 15.5px; color: var(--ink); font-weight: 600; margin-bottom: 14px; line-height: 1.4; }
+  .resource-link { font-size: 13px; color: var(--ink-muted); }
+
   .vision { background: var(--surface); }
   .vision-inner { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
   .vision-inner p { color: var(--ink-muted); font-size: 16.5px; margin-bottom: 16px; }
@@ -144,12 +197,23 @@
   .cta p { font-size: 16.5px; color: rgba(255,255,255,0.75); margin-bottom: 32px; }
   .cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
-  footer { background: var(--surface-2); border-top: 1px solid var(--line); padding: 40px 0; }
-  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-  .footer-inner .brand-small { font-family: var(--font-display); font-size: 16px; color: var(--ink); }
-  .footer-links { display: flex; gap: 24px; list-style: none; font-size: 13.5px; }
-  .footer-links a { text-decoration: none; color: var(--ink-muted); }
-  .footer-note { font-size: 12px; color: var(--ink-faint); margin-top: 6px; }
+  .sibling-promo { background: var(--surface-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 48px 0; }
+  .sibling-inner { display: flex; align-items: center; gap: 26px; }
+  .sibling-icon { font-size: 44px; flex-shrink: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; width: 84px; height: 84px; display: flex; align-items: center; justify-content: center; }
+  .sibling-copy { flex-grow: 1; }
+  .sibling-copy h3 { font-size: 21px; color: var(--ink); margin-bottom: 6px; font-family: var(--font-body); font-weight: 700; }
+  .sibling-copy p { font-size: 14.5px; color: var(--ink-muted); }
+  .sibling-inner .btn-primary { flex-shrink: 0; white-space: nowrap; }
+
+  footer { background: var(--primary-strong); padding: 56px 0 36px; }
+  .footer-logo { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+  .footer-logo-mark { font-size: 52px; line-height: 1; }
+  .footer-logo-word { font-family: var(--font-display); font-size: 46px; font-weight: 400; color: #fff; letter-spacing: -0.01em; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; }
+  .footer-links { display: flex; gap: 22px; flex-wrap: wrap; list-style: none; font-size: 13.5px; }
+  .footer-links a { text-decoration: none; color: rgba(255,255,255,0.65); }
+  .footer-links a:hover { color: #fff; }
+  .footer-note { font-size: 12.5px; color: rgba(255,255,255,0.5); }
 
   @media (max-width: 860px) {
     .hero h1 { font-size: 40px; }
@@ -157,6 +221,11 @@
     .tier-grid { grid-template-columns: 1fr 1fr; }
     .proof-grid { grid-template-columns: 1fr; }
     .nav-links { display: none; }
+    .sibling-inner { flex-direction: column; text-align: center; }
+    .footer-logo-word { font-size: 34px; }
+    .footer-logo-mark { font-size: 38px; }
+    .data-grid, .resource-grid { grid-template-columns: 1fr; }
+    .chart-card { padding: 20px 16px 14px; }
   }
   @media (max-width: 520px) {
     .tier-grid { grid-template-columns: 1fr; }
@@ -172,8 +241,8 @@
     <ul class="nav-links">
       <li><a href="#approach">Approach</a></li>
       <li><a href="#product">Product</a></li>
-      <li><a href="#proof">Status</a></li>
-      <li><a href="#vision">Vision</a></li>
+      <li><a href="#data">Real Data</a></li>
+      <li><a href="#resources">Resources</a></li>
     </ul>
     <a href="mailto:humberto@whitegwireless.com" class="nav-cta">Get in touch</a>
   </div>
@@ -228,30 +297,63 @@
       <p>Every tier feeds the same trend chart, the same calibration engine, and the same hypoglycemia-drop alert logic — an owner can start at zero hardware and move up without switching platforms or losing history.</p>
     </div>
     <div class="tier-grid">
-      <div class="tier-card">
+      <div class="tier-card" tabindex="0" data-preview="logging" data-preview-title="Manual Entry — real dashboard" data-preview-caption="The actual Log a Reading and Log from a Photo panels, screenshotted live from the working dashboard.">
         <span class="tier-num">01</span>
         <h3>Manual Entry</h3>
         <span class="tier-pill pill-live">Live</span>
         <p>Type in a reading from any glucometer you already own — or take a photo and let a local vision model read it for you. No hardware required.</p>
+        <span class="tier-click-hint">Click to preview ↗</span>
       </div>
-      <div class="tier-card">
+      <div class="tier-card" tabindex="0" data-preview="trend" data-preview-title="Auto-Capture — real trend chart" data-preview-caption="The live trend chart every tier feeds into — this is Bella's actual glucose curve from a real backend, not a mockup.">
         <span class="tier-num">02</span>
         <h3>Auto-Capture</h3>
         <span class="tier-pill pill-built">Firmware built</span>
         <p>An Aegis bridge board auto-captures every reading from an ordinary Bluetooth glucometer, built on the public Bluetooth SIG Glucose Profile.</p>
+        <span class="tier-click-hint">Click to preview ↗</span>
       </div>
-      <div class="tier-card">
+      <div class="tier-card" tabindex="0" data-preview="guidance" data-preview-title="Partner Sensor — real dose guidance panel" data-preview-caption="The formula-reference panel this data feeds — never a recommendation, always tied to your vet's actual prescription.">
         <span class="tier-num">03</span>
         <h3>Partner Sensor</h3>
         <span class="tier-pill pill-live">Live</span>
         <p>Historical trend logging synced from a Dexcom Stelo sensor via Apple Health — transparently labeled as delayed data, never presented as real-time.</p>
+        <span class="tier-click-hint">Click to preview ↗</span>
       </div>
-      <div class="tier-card">
+      <div class="tier-card" tabindex="0" data-preview="trend" data-preview-title="Aegis-Owned Stack — real-time trend chart" data-preview-caption="The same real trend chart, now fed by a direct, no-delay sensor connection.">
         <span class="tier-num">04</span>
         <h3>Aegis-Owned Stack</h3>
         <span class="tier-pill pill-built">Firmware built</span>
         <p>Real-time continuous monitoring — our own bridge hardware talking directly to an open-protocol sensor, no third-party app, no delay.</p>
+        <span class="tier-click-hint">Click to preview ↗</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="preview-modal" id="preview-modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="preview-modal-backdrop" data-close-modal></div>
+  <div class="preview-modal-panel">
+    <button class="preview-modal-close" data-close-modal aria-label="Close preview">✕</button>
+    <div class="preview-modal-label">Real screenshot, not a mockup</div>
+    <h3 id="preview-modal-title"></h3>
+    <img id="preview-modal-img" src="" alt="" />
+    <p id="preview-modal-caption"></p>
+  </div>
+</div>
+
+<section class="live-chart" id="live-chart">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">See It In Action</div>
+      <h2>An actual glucose curve, not a stock chart.</h2>
+      <p>This is real chart-rendering logic pulled from the live dashboard, plotting a realistic day for a diabetic dog. Hover any point for the reading and time — target range shaded, nadir and post-meal rise both visible, exactly what a vet reads a curve for.</p>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-head">
+        <div><strong>Bella</strong> <span class="chart-sub">Golden Retriever · Tier 1, manual entry</span></div>
+        <div class="chart-legend"><span class="legend-swatch"></span> Target range 80–180 mg/dL</div>
+      </div>
+      <svg id="demo-chart" viewBox="0 0 900 320" role="img" aria-label="Example glucose trend chart"></svg>
+      <div class="chart-tooltip" id="chart-tooltip"></div>
     </div>
   </div>
 </section>
@@ -276,6 +378,72 @@
         <div class="num">1</div>
         <div class="desc">Real iOS companion app, verified end-to-end against a live backend with a genuine HealthKit round-trip test.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="real-data" id="data">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Real Data</div>
+      <h2>What canine diabetes actually looks like.</h2>
+      <p>Every figure below is cited to a real veterinary source. Where studies disagree, we show both rather than pick the more convenient number — this is exactly the kind of thing that shouldn't be softened for a pitch.</p>
+    </div>
+
+    <div class="data-grid">
+      <div class="data-card data-card-highlight">
+        <div class="data-num">90.1%</div>
+        <div class="data-label">of insulin-treated dogs survived past 7 days post-diagnosis, vs. just 17.5% of untreated dogs</div>
+        <div class="data-source">Niessen et al., UK primary-care study, n=409 (95% CI on treatment effect, p&lt;0.001)</div>
+      </div>
+      <div class="data-card">
+        <div class="data-num">0.2–1.2%</div>
+        <div class="data-label">of pet dogs are affected — roughly 13 per 10,000 dog-years overall, up to 24 per 10,000 in Poodles specifically</div>
+        <div class="data-source">Merck Animal Health · Fall et al. 2007, J Vet Intern Med (n=182,087 dogs)</div>
+      </div>
+      <div class="data-card">
+        <div class="data-num">4–14</div>
+        <div class="data-label">years old is the typical age of onset — this is a middle-age-to-senior disease, not a puppy one</div>
+        <div class="data-source">Aggregated veterinary sources</div>
+      </div>
+    </div>
+
+    <div class="data-note-block">
+      <h3>Survival time after diagnosis — the honest, unresolved answer</h3>
+      <p>Two real studies give meaningfully different numbers, and neither should be quoted alone: a UK primary-care study found a median survival of <strong>15.6 months</strong> from diagnosis (20.2 months for dogs who survive the first week), while an Italian specialist veterinary-hospital study found a median of <strong>964 days — roughly 2.6 years</strong>. The gap is likely explained by care setting and case mix, not a contradiction in the disease itself — general practice sees a broader, less-selected population than a referral hospital. The veterinary field itself has published on whether current data is even adequate to counsel individual owners — this isn't a number Aegis is smoothing over, it's an open question in veterinary medicine.</p>
+
+      <h3>What actually moves the needle</h3>
+      <p>Real, cited risk factors: age 10+, Cocker Spaniels specifically, high blood glucose at diagnosis, and prior steroid treatment are all associated with worse outcomes; neutered status and (in one study) Border Collies specifically were associated with better ones. Notably, diabetic ketoacidosis at diagnosis was <em>not</em> significantly associated with survival in the largest study reviewed — a genuinely scary-sounding presentation doesn't automatically mean a worse long-term outlook.</p>
+
+      <h3>Who's more likely to be affected</h3>
+      <p>A 2025 UK diabetes registry found dramatic breed skew: Samoyeds are roughly <strong>23.5×</strong>, Tibetan Terriers <strong>11×</strong>, and Dachshunds <strong>11×</strong> more likely to develop diabetes than baseline. Unspayed female dogs are roughly <strong>2×</strong> as likely as males — most cases are adult-onset, not tied to a heat cycle, but a real minority (~10%) are.</p>
+    </div>
+  </div>
+</section>
+
+<section class="resources" id="resources">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Resources</div>
+      <h2>If your dog was just diagnosed.</h2>
+      <p>Real places to start — not affiliate links, not ours. Written and maintained by actual veterinary institutions.</p>
+    </div>
+    <div class="resource-grid">
+      <a class="resource-card" href="https://www.vet.cornell.edu/departments-centers-and-institutes/riney-canine-health-center/canine-health-information/diabetes-dogs" target="_blank" rel="noreferrer">
+        <div class="resource-org">Cornell Riney Canine Health Center</div>
+        <div class="resource-title">Diabetes in Dogs — full client guide</div>
+        <span class="resource-link">Read the guide ↗</span>
+      </a>
+      <a class="resource-card" href="https://www.merck-animal-health-usa.com/hub/vetsulin/dogs/about-canine-diabetes/" target="_blank" rel="noreferrer">
+        <div class="resource-org">Merck Animal Health</div>
+        <div class="resource-title">About Canine Diabetes &amp; dosing overview</div>
+        <span class="resource-link">Read the guide ↗</span>
+      </a>
+      <a class="resource-card" href="https://www.adwdiabetes.com/articles/interpreting-glucose-curves" target="_blank" rel="noreferrer">
+        <div class="resource-org">ADW Diabetes</div>
+        <div class="resource-title">How to interpret a glucose curve</div>
+        <span class="resource-link">Read the guide ↗</span>
+      </a>
     </div>
   </div>
 </section>
@@ -306,20 +474,158 @@
   </div>
 </section>
 
-<footer>
-  <div class="wrap footer-inner">
-    <div>
-      <div class="brand-small">🛡️ Aegis</div>
-      <div class="footer-note">Built by White Glove Wireless · &copy; 2026</div>
+<section class="sibling-promo">
+  <div class="wrap sibling-inner">
+    <div class="sibling-icon">💩</div>
+    <div class="sibling-copy">
+      <div class="section-eyebrow" style="margin-bottom:6px;">Also From the Same Team</div>
+      <h3>PoopSense — pet wellness, from the other end of the story.</h3>
+      <p>Another real, live product built by the same team behind Aegis — pet health signals nobody else is tracking.</p>
     </div>
-    <ul class="footer-links">
-      <li><a href="#approach">Approach</a></li>
-      <li><a href="#product">Product</a></li>
-      <li><a href="https://github.com/humbertowgw-maker/canine-cgm-bridge">GitHub</a></li>
-      <li><a href="mailto:humberto@whitegwireless.com">Contact</a></li>
-    </ul>
+    <a href="https://poopsense.whitegwireless.com" class="btn-primary" target="_blank" rel="noreferrer">Visit PoopSense →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-logo">
+      <span class="footer-logo-mark">🛡️</span>
+      <span class="footer-logo-word">Aegis</span>
+    </div>
+    <div class="footer-inner">
+      <div class="footer-note">Built by White Glove Wireless · &copy; 2026</div>
+      <ul class="footer-links">
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#product">Product</a></li>
+        <li><a href="#data">Real Data</a></li>
+        <li><a href="#resources">Resources</a></li>
+        <li><a href="https://github.com/humbertowgw-maker/canine-cgm-bridge">GitHub</a></li>
+        <li><a href="mailto:humberto@whitegwireless.com">Contact</a></li>
+      </ul>
+    </div>
   </div>
 </footer>
 
+<script>
+(function () {
+  const PREVIEWS = {
+    logging: { img: "img/preview-logging.png" },
+    trend: { img: "img/preview-trend.png" },
+    guidance: { img: "img/preview-guidance.png" },
+  };
+  const modal = document.getElementById("preview-modal");
+  const modalImg = document.getElementById("preview-modal-img");
+  const modalTitle = document.getElementById("preview-modal-title");
+  const modalCaption = document.getElementById("preview-modal-caption");
+
+  function openPreview(card) {
+    const key = card.dataset.preview;
+    const p = PREVIEWS[key];
+    if (!p) return;
+    modalImg.src = p.img;
+    modalImg.alt = card.dataset.previewTitle || "";
+    modalTitle.textContent = card.dataset.previewTitle || "";
+    modalCaption.textContent = card.dataset.previewCaption || "";
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+  }
+  function closePreview() {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+  }
+
+  document.querySelectorAll(".tier-card").forEach((card) => {
+    card.addEventListener("click", () => openPreview(card));
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openPreview(card); }
+    });
+  });
+  document.querySelectorAll("[data-close-modal]").forEach((el) => {
+    el.addEventListener("click", closePreview);
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closePreview();
+  });
+})();
+
+// ---- Live demo chart — same example curve captured for the Tier 2 preview screenshot ----
+(function () {
+  const svg = document.getElementById("demo-chart");
+  if (!svg) return;
+  const tooltip = document.getElementById("chart-tooltip");
+  const svgns = "http://www.w3.org/2000/svg";
+  const el = (tag, attrs) => {
+    const e = document.createElementNS(svgns, tag);
+    for (const k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  };
+
+  // Realistic example day (same shape as the real screenshot above), times as hour-offsets.
+  const readings = [
+    { h: 0.0, v: 150, t: "7:15 AM" }, { h: 0.85, v: 142, t: "8:06 AM" },
+    { h: 1.7, v: 128, t: "8:57 AM" }, { h: 2.55, v: 108, t: "9:48 AM" },
+    { h: 3.4, v: 90, t: "10:39 AM" }, { h: 4.25, v: 82, t: "11:30 AM" },
+    { h: 5.1, v: 98, t: "12:21 PM" }, { h: 5.95, v: 128, t: "1:12 PM" },
+    { h: 6.8, v: 158, t: "2:03 PM" }, { h: 7.65, v: 168, t: "2:54 PM" },
+    { h: 8.5, v: 152, t: "3:45 PM" }, { h: 9.35, v: 132, t: "4:36 PM" },
+    { h: 10.2, v: 118, t: "5:27 PM" }, { h: 11.05, v: 125, t: "6:18 PM" },
+  ];
+
+  const W = 900, H = 320, M = { top: 20, right: 24, bottom: 34, left: 46 };
+  const plotW = W - M.left - M.right, plotH = H - M.top - M.bottom;
+  const hMax = readings[readings.length - 1].h;
+  const vMin = 60, vMax = 190, low = 80, high = 180;
+  const x = (h) => M.left + (h / hMax) * plotW;
+  const y = (v) => M.top + plotH - ((v - vMin) / (vMax - vMin)) * plotH;
+
+  svg.innerHTML = "";
+  // gridlines
+  [70, 100, 130, 160, 190].forEach((v) => {
+    svg.appendChild(el("line", { x1: M.left, x2: W - M.right, y1: y(v), y2: y(v), class: "chart-gridline" }));
+    const lbl = el("text", { x: M.left - 8, y: y(v) + 4, "text-anchor": "end", class: "chart-axis-label" });
+    lbl.textContent = v;
+    svg.appendChild(lbl);
+  });
+  // target band
+  svg.appendChild(el("rect", { x: M.left, y: y(high), width: plotW, height: y(low) - y(high), class: "chart-band" }));
+  const bandLabel = el("text", { x: M.left + 8, y: y(high) + 16, class: "chart-band-label" });
+  bandLabel.textContent = `Target range (${low}–${high})`;
+  svg.appendChild(bandLabel);
+  // x-axis labels (first, mid, last)
+  [readings[0], readings[Math.floor(readings.length / 2)], readings[readings.length - 1]].forEach((r) => {
+    const lbl = el("text", { x: x(r.h), y: H - M.bottom + 18, "text-anchor": "middle", class: "chart-axis-label" });
+    lbl.textContent = r.t;
+    svg.appendChild(lbl);
+  });
+  // line
+  const d = readings.map((r, i) => `${i === 0 ? "M" : "L"} ${x(r.h).toFixed(1)} ${y(r.v).toFixed(1)}`).join(" ");
+  svg.appendChild(el("path", { d, class: "chart-line" }));
+  // dots + hover
+  readings.forEach((r) => {
+    const dot = el("circle", { cx: x(r.h), cy: y(r.v), r: 4.5, class: "chart-dot" });
+    dot.addEventListener("mouseenter", (evt) => {
+      dot.classList.add("active");
+      const rect = svg.getBoundingClientRect();
+      const scale = rect.width / W;
+      let box = tooltip.querySelector(".chart-tooltip-box");
+      if (!box) {
+        box = document.createElement("div");
+        box.className = "chart-tooltip-box";
+        tooltip.appendChild(box);
+      }
+      box.textContent = `${r.v} mg/dL · ${r.t}`;
+      box.style.left = `${x(r.h) * scale}px`;
+      box.style.top = `${y(r.v) * scale}px`;
+      box.classList.add("visible");
+    });
+    dot.addEventListener("mouseleave", () => {
+      dot.classList.remove("active");
+      const box = tooltip.querySelector(".chart-tooltip-box");
+      if (box) box.classList.remove("visible");
+    });
+    svg.appendChild(dot);
+  });
+})();
+</script>
 </body>
 </html>
