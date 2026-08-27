@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aegis — Glucose Monitoring, Built by Integration Not Invention</title>
-<meta name="description" content="Aegis is a tiered glucose-monitoring platform for diabetic dogs, built by combining proven medical hardware instead of inventing a new biosensor — starting free, scaling to continuous monitoring." />
-<meta property="og:title" content="Aegis" />
+<title>Aegis &amp; Fur — Glucose Monitoring, Built by Integration Not Invention</title>
+<meta name="description" content="Aegis &amp; Fur is a tiered glucose-monitoring platform for diabetic dogs, built by combining proven medical hardware instead of inventing a new biosensor — starting free, scaling to continuous monitoring. Every tail deserves a guardian." />
+<meta property="og:title" content="Aegis &amp; Fur" />
 <meta property="og:description" content="A tiered glucose-monitoring platform for diabetic dogs — accessible, affordable, built on proven hardware." />
 <meta property="og:type" content="website" />
 <meta name="theme-color" content="#142837" />
+<link rel="icon" type="image/svg+xml" href="img/logo-mark.svg" />
 <style>
   :root {
     --bg: #F2F4F6;
@@ -51,7 +52,7 @@
   }
   nav .wrap { display: flex; align-items: center; justify-content: space-between; padding: 16px 32px; }
   .brand { display: flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-family: var(--font-display); font-size: 20px; letter-spacing: 0.02em; }
-  .brand .mark { font-size: 22px; }
+  .brand .mark { width: 27px; height: auto; display: block; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
   .nav-links { display: flex; gap: 28px; list-style: none; }
   .nav-links a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; transition: color 0.15s; }
   .nav-links a:hover { color: #fff; }
@@ -208,8 +209,9 @@
 
   footer { background: var(--primary-strong); padding: 56px 0 36px; }
   .footer-logo { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
-  .footer-logo-mark { font-size: 52px; line-height: 1; }
+  .footer-logo-mark { width: 64px; height: auto; display: block; }
   .footer-logo-word { font-family: var(--font-display); font-size: 46px; font-weight: 400; color: #fff; letter-spacing: -0.01em; }
+  .footer-tagline { font-size: 14px; color: rgba(255,255,255,0.55); font-style: italic; margin-top: 4px; font-family: var(--font-body); }
   .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; border-top: 1px solid rgba(255,255,255,0.12); padding-top: 24px; }
   .footer-links { display: flex; gap: 22px; flex-wrap: wrap; list-style: none; font-size: 13.5px; }
   .footer-links a { text-decoration: none; color: rgba(255,255,255,0.65); }
@@ -224,7 +226,7 @@
     .nav-links { display: none; }
     .sibling-inner { flex-direction: column; text-align: center; }
     .footer-logo-word { font-size: 34px; }
-    .footer-logo-mark { font-size: 38px; }
+    .footer-logo-mark { width: 48px; }
     .data-grid, .resource-grid { grid-template-columns: 1fr; }
     .chart-card { padding: 20px 16px 14px; }
   }
@@ -238,7 +240,7 @@
 
 <nav>
   <div class="wrap">
-    <a href="#" class="brand"><span class="mark">🛡️</span> Aegis</a>
+    <a href="#" class="brand"><img class="mark" src="img/logo-mark.svg" alt="Aegis &amp; Fur logo" /> Aegis &amp; Fur</a>
     <ul class="nav-links">
       <li><a href="#approach">Approach</a></li>
       <li><a href="#product">Product</a></li>
@@ -253,7 +255,7 @@
   <div class="wrap hero-inner">
     <div class="eyebrow">Now building — Tiers 1&ndash;4 in active development</div>
     <h1>Glucose monitoring for dogs, built by <em>integration</em>, not invention.</h1>
-    <p class="lede">Aegis combines already-proven, already-cleared medical hardware into one platform that scales from free manual logging to full continuous monitoring — instead of spending years building a new biosensor from scratch.</p>
+    <p class="lede">Aegis &amp; Fur combines already-proven, already-cleared medical hardware into one platform that scales from free manual logging to full continuous monitoring — instead of spending years building a new biosensor from scratch. <em>Every tail deserves a guardian.</em></p>
     <div class="hero-actions">
       <a href="https://aegis-demo-production-a33e.up.railway.app/dashboard/?key=aegis-demo-2026-view-only" class="btn-primary" target="_blank" rel="noreferrer">Try the live demo ↗</a>
       <a href="#product" class="btn-ghost">See the product</a>
@@ -273,7 +275,7 @@
     <div class="section-head">
       <div class="section-eyebrow">The Approach</div>
       <h2>We are not a biosensor company.</h2>
-      <p>Designing a new glucose-sensing element is a multi-year, capital-intensive, regulatory-heavy undertaking — and doing early iterations of that on a living animal is a real safety problem, not a corner worth cutting. Aegis's engineering goes into the layer above the sensor.</p>
+      <p>Designing a new glucose-sensing element is a multi-year, capital-intensive, regulatory-heavy undertaking — and doing early iterations of that on a living animal is a real safety problem, not a corner worth cutting. Aegis &amp; Fur's engineering goes into the layer above the sensor.</p>
     </div>
     <div class="approach-grid">
       <div>
@@ -311,7 +313,7 @@
         <span class="tier-num">02</span>
         <h3>Auto-Capture</h3>
         <span class="tier-pill pill-built">Firmware built</span>
-        <p>An Aegis bridge board auto-captures every reading from an ordinary Bluetooth glucometer, built on the public Bluetooth SIG Glucose Profile.</p>
+        <p>An Aegis &amp; Fur bridge board auto-captures every reading from an ordinary Bluetooth glucometer, built on the public Bluetooth SIG Glucose Profile.</p>
         <span class="tier-click-hint">Click to preview ↗</span>
       </div>
       <div class="tier-card" tabindex="0" data-preview="guidance" data-preview-title="Partner Sensor — real dose guidance panel" data-preview-caption="The formula-reference panel this data feeds — never a recommendation, always tied to your vet's actual prescription.">
@@ -413,7 +415,7 @@
 
     <div class="data-note-block">
       <h3>Survival time after diagnosis — the honest, unresolved answer</h3>
-      <p>Two real studies give meaningfully different numbers, and neither should be quoted alone: a UK primary-care study found a median survival of <strong>15.6 months</strong> from diagnosis (20.2 months for dogs who survive the first week), while an Italian specialist veterinary-hospital study found a median of <strong>964 days — roughly 2.6 years</strong>. The gap is likely explained by care setting and case mix, not a contradiction in the disease itself — general practice sees a broader, less-selected population than a referral hospital. The veterinary field itself has published on whether current data is even adequate to counsel individual owners — this isn't a number Aegis is smoothing over, it's an open question in veterinary medicine.</p>
+      <p>Two real studies give meaningfully different numbers, and neither should be quoted alone: a UK primary-care study found a median survival of <strong>15.6 months</strong> from diagnosis (20.2 months for dogs who survive the first week), while an Italian specialist veterinary-hospital study found a median of <strong>964 days — roughly 2.6 years</strong>. The gap is likely explained by care setting and case mix, not a contradiction in the disease itself — general practice sees a broader, less-selected population than a referral hospital. The veterinary field itself has published on whether current data is even adequate to counsel individual owners — this isn't a number Aegis &amp; Fur is smoothing over, it's an open question in veterinary medicine.</p>
 
       <h3>What actually moves the needle</h3>
       <p>Real, cited risk factors: age 10+, Cocker Spaniels specifically, high blood glucose at diagnosis, and prior steroid treatment are all associated with worse outcomes; neutered status and (in one study) Border Collies specifically were associated with better ones. Notably, diabetic ketoacidosis at diagnosis was <em>not</em> significantly associated with survival in the largest study reviewed — a genuinely scary-sounding presentation doesn't automatically mean a worse long-term outlook.</p>
@@ -469,7 +471,7 @@
 <section class="cta">
   <div class="wrap cta-inner">
     <h2>Building something real in a space that needed it.</h2>
-    <p>Aegis is founder-led, built with near-zero cash burn, and every claim on this page is backed by working code — not just a plan. If you're an investor, a partner, or a vet who wants to see more, we'd like to talk.</p>
+    <p>Aegis &amp; Fur is founder-led, built with near-zero cash burn, and every claim on this page is backed by working code — not just a plan. If you're an investor, a partner, or a vet who wants to see more, we'd like to talk.</p>
     <div class="cta-actions">
       <a href="mailto:humberto@whitegwireless.com" class="btn-primary">Email humberto@whitegwireless.com</a>
       <a href="https://github.com/humbertowgw-maker/canine-cgm-bridge" class="btn-ghost">View the code</a>
@@ -483,7 +485,7 @@
     <div class="sibling-copy">
       <div class="section-eyebrow" style="margin-bottom:6px;">Also From the Same Team</div>
       <h3>PoopSense — pet wellness, from the other end of the story.</h3>
-      <p>Another real, live product built by the same team behind Aegis — pet health signals nobody else is tracking.</p>
+      <p>Another real, live product built by the same team behind Aegis &amp; Fur — pet health signals nobody else is tracking.</p>
     </div>
     <a href="https://poopsense.whitegwireless.com" class="btn-primary" target="_blank" rel="noreferrer">Visit PoopSense →</a>
   </div>
@@ -492,8 +494,11 @@
 <footer>
   <div class="wrap">
     <div class="footer-logo">
-      <span class="footer-logo-mark">🛡️</span>
-      <span class="footer-logo-word">Aegis</span>
+      <img class="footer-logo-mark" src="img/logo-mark.svg" alt="Aegis &amp; Fur logo" />
+      <div>
+        <span class="footer-logo-word">Aegis &amp; Fur</span>
+        <div class="footer-tagline">Every tail deserves a guardian.</div>
+      </div>
     </div>
     <div class="footer-inner">
       <div class="footer-note">Built by White Glove Wireless · &copy; 2026</div>

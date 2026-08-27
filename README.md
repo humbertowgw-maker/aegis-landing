@@ -1,8 +1,9 @@
-# Aegis Landing
+# Aegis & Fur Landing
 
-Public marketing/explainer page for Aegis — a tiered glucose-monitoring
-platform for diabetic dogs, built by integrating proven medical hardware
-instead of inventing a new biosensor.
+Public marketing/explainer page for **Aegis & Fur** — *"Every tail deserves a guardian."*
+A tiered glucose-monitoring platform for diabetic dogs, built by integrating proven
+medical hardware instead of inventing a new biosensor. (Rebranded from plain "Aegis"
+to avoid conflict with an existing business.)
 
 ## What's here
 
